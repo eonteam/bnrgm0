@@ -1,0 +1,11 @@
+platforms:
+  - "*"
+includes:
+  - inc/
+  - usr_config/
+  - ST-Middleware/BlueNRG-MS/hci/hci_tl_patterns/Basic/
+  - ST-Middleware/BlueNRG-MS/includes/
+  - ST-Middleware/BlueNRG-MS/utils/
+macros:
+dependencies:
+
