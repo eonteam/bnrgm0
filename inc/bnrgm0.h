@@ -191,9 +191,10 @@ void __bnrg_on_connect(ble_conn_t conn);
 void __bnrg_on_disconnect(ble_conn_t conn);
 #define BNRG_EVT_ON_DISCONNECT(conn) void __bnrg_on_disconnect(ble_conn_t conn)
 
-#define BNRG_EVT_ON_ATTR_MODIFIED(attr_handle, attr_data, attr_data_len) \
-  void aci_gatt_attribute_modified_event(uint16_t attr_handle,           \
-                                         uint16_t attr_data_len,         \
+#define BNRG_EVT_ON_ATTR_MODIFIED(conn, attr_handle, attr_data, attr_data_len) \
+  void aci_gatt_attribute_modified_event(uint16_t conn,                        \
+                                         uint16_t attr_handle,                 \
+                                         uint16_t attr_data_len,               \
                                          uint8_t attr_data[])
 
 // ===============================================================

@@ -308,13 +308,13 @@ void bnrgm0_setConnectableMode(bool en) {
   ble_state.connectable_mode_enabled = en;
 }
 
-// Execute bluenrg2 processes (must be called always in the loop).
+// Execute Bluenrg-M0 processes (must be called always in the loop).
 //
 void bnrgm0_process(void) {
   uint8_t ret;
   hci_user_evt_proc();
   if (ble_state.is_connected == false) {
-    // If Bluenrg2 is in discoverable mode stopped and the user enabled connectable mode,
+    // If Bluenrg-M0 is in discoverable mode stopped and the user enabled connectable mode,
     // then set discoverable mode.
     if (ble_state.discoverable_mode == DISCOVERABLE_MODE_STOPPED &&
         ble_state.connectable_mode_enabled) {
@@ -332,7 +332,7 @@ void bnrgm0_process(void) {
         ble_state.discoverable_mode = DISCOVERABLE_MODE_STARTED;
       }
     }
-    // If Bluenrg2 has started the discoverable mode and the user disabled connectable mode,
+    // If Bluenrg-M0 has started the discoverable mode and the user disabled connectable mode,
     // then set non discoverable mode.
     if (ble_state.discoverable_mode == DISCOVERABLE_MODE_STARTED &&
         !ble_state.connectable_mode_enabled) {

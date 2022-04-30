@@ -12,8 +12,8 @@
 
 __weak void hci_le_connection_complete_event(uint8_t peer_addr[6], uint16_t conn_handle);
 __weak void hci_disconnection_complete_event(uint8_t status, uint8_t conn_handle, uint8_t reason);
-__weak void aci_gatt_attribute_modified_event(uint16_t attr_handle, uint8_t data_length, uint8_t *attr_data);
-__weak void aci_gatt_notification_event(uint16_t attr_handle, uint8_t attr_len, uint8_t *attr_value);
+__weak void aci_gatt_attribute_modified_event(uint16_t conn_handle, uint16_t attr_handle, uint8_t data_length, uint8_t *attr_data);
+__weak void aci_gatt_notification_event(uint16_t conn_handle, uint16_t attr_handle, uint8_t attr_len, uint8_t *attr_value);
 __weak void aci_att_exchange_mtu_resp_event(uint16_t conn_handle, uint16_t server_rx_mtu);
 
 // ===============================================================
@@ -52,11 +52,11 @@ void bnrgm0_event_rx(void *pData) {
 
         case EVT_BLUE_GATT_ATTRIBUTE_MODIFIED: {
           evt_gatt_attr_modified_IDB05A1 *evt = (evt_gatt_attr_modified_IDB05A1 *) blue_evt->data;
-          aci_gatt_attribute_modified_event(evt->attr_handle, evt->data_length, evt->att_data);
+          aci_gatt_attribute_modified_event(evt->conn_handle, evt->attr_handle, evt->data_length, evt->att_data);
         } break;
-        case EVT_BLUE_GATT_NOTIFICATION: {
+        case EVT_BLUE_GATT_NOTIFICATION: { // when the device work as CLIENT mode
           evt_gatt_attr_notification *evt = (evt_gatt_attr_notification *) blue_evt->data;
-          aci_gatt_notification_event(evt->attr_handle, evt->event_data_length - 2, evt->attr_value);
+          aci_gatt_notification_event(evt->conn_handle, evt->attr_handle, evt->event_data_length - 2, evt->attr_value);
         } break;
         case EVT_BLUE_ATT_EXCHANGE_MTU_RESP: {
           evt_att_exchange_mtu_resp *evt = (evt_att_exchange_mtu_resp *) blue_evt->data;
